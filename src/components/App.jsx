@@ -10,35 +10,15 @@ import css from './App.module.css';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
+      { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
+      { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
+      { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
+    ],
     filter: '',
   };
-
-  componentDidMount = () => {
-    const data = JSON.parse(localStorage.getItem('contact-list'));
-    if (data) {
-      this.setState({ contacts: [...data] });
-    } else {
-      this.setState({
-        contacts: [
-          { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-          { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-          { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-          { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-        ],
-      });
-    }
-  };
-
-  componentDidUpdate = prevState => {
-    if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem(
-        'contact-list',
-        JSON.stringify(this.state.contacts)
-      );
-    }
-  };
-
+  
   isNameHas = name => {
     return this.state.contacts.some(contact => contact.name === name);
   };
